@@ -1,4 +1,4 @@
-package com.mvvmclean
+package com.mvvmclean.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,9 +6,12 @@ import android.view.View
 import android.widget.Toast
 
 import com.domain.entities.MarvelCharacter
-import com.mvvmclean.di.useCasesModule
-import com.mvvmclean.di.viewModelModule
-import com.mvvmclean.viewmodels.CharacterViewModel
+import com.mvvmclean.R
+import com.mvvmclean.ui.di.useCasesModule
+import com.mvvmclean.ui.di.viewModelModule
+import com.mvvmclean.ui.utils.Data
+import com.mvvmclean.ui.utils.Status
+import com.mvvmclean.ui.viewmodels.CharacterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.startKoin

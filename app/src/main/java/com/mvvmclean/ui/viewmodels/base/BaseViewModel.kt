@@ -1,4 +1,4 @@
-package com.mvvmclean
+package com.mvvmclean.ui.viewmodels.base
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CompletableJob

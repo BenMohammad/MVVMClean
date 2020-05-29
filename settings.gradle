@@ -1,2 +1,2 @@
 rootProject.name='MVVMClean'
-include ':app', ':data', ':domain'
+include ':app', ':domain', ':data'
