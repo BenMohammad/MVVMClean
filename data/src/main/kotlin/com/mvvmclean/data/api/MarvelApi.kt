@@ -1,8 +1,8 @@
 package com.mvvmclean.data.api
 
-import com.mvvmclean.data.response.CharacterResponse
-import com.mvvmclean.data.response.DataBaseResponse
-import com.mvvmclean.data.response.MarvelBaseResponse
+import com.mvvmclean.data.service.response.CharacterResponse
+import com.mvvmclean.data.service.response.DataBaseResponse
+import com.mvvmclean.data.service.response.MarvelBaseResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

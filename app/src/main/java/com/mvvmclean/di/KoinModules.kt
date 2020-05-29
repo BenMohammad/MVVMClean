@@ -9,6 +9,5 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
     single<MarvelCharacterRepositoryContract> {MarvelCharacterRepository()}
-    single { FindCharacterImpl() }
-    viewModel { CharacterViewModel(get()) }
+    viewModel { CharacterViewModel() }
 }

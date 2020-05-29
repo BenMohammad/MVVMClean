@@ -1,8 +1,7 @@
 package com.mvvmclean.data.mapper
 
 import com.domain.entities.MarvelCharacter
-import com.mvvmclean.data.response.CharacterResponse
-import com.mvvmclean.data.response.MarvelBaseResponse
+import com.mvvmclean.data.service.response.CharacterResponse
 
 open class CharacterMapperService: BaseMapperRepository<CharacterResponse, MarvelCharacter> {
 

@@ -1,4 +1,4 @@
-package com.mvvmclean.data.response
+package com.mvvmclean.data.service.response
 
 class CharacterResponse (
     val id: Int,

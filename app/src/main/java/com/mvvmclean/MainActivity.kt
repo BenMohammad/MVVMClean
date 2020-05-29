@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         startKoin {
-            androidLogger()
             modules(useCaseModule)
         }
 
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 showProgress()
             }
 
-            Status.SUCCESSFULL -> {
+            Status.SUCCESSFUL -> {
                 hideProgress()
                 characterData.data?.let { setCharacter(it)}
             }

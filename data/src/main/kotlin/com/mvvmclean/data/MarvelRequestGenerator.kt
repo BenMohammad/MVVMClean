@@ -26,7 +26,7 @@ class MarvelRequestGenerator {
     }
 
     private val builder = Retrofit.Builder()
-        .baseUrl("http://gateway.marvel.com/public/")
+        .baseUrl("https://gateway.marvel.com/public/")
         .addConverterFactory(GsonConverterFactory.create())
 
     fun <S> createService(serviceClass: Class<S>): S {

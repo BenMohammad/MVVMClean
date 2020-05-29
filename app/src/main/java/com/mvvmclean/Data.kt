@@ -1,5 +1,5 @@
 package com.mvvmclean
 
-data class Data<RequestData> (var responseType: Status, var data: RequestData? = null, var error: Throwable? = null)
+data class Data<RequestData> (var responseType: Status, var data: RequestData? = null, var error: Exception? = null)
 
-enum class Status{SUCCESSFULL, ERROR, LOADING}
+enum class Status{SUCCESSFUL, ERROR, LOADING}
