@@ -23,11 +23,11 @@ class CharacterViewModel: BaseViewModel(SupervisorJob(), Dispatchers.Default) {
         }
 
 
-    fun onSearchClicked(id: Int) {
+    fun onSearchRemoteClicked(id: Int) {
         mutableMainState.value =
             Data(responseType = Status.LOADING)
         viewModelCoroutineScope.launch {
-            when(val result = getCharacterById(id)) {
+            when(val result = getCharacterById(id, true)) {
                 is Result.Failure -> {
                     mutableMainState.postValue(
                         Data(
@@ -44,6 +44,17 @@ class CharacterViewModel: BaseViewModel(SupervisorJob(), Dispatchers.Default) {
                             data = result.data
                         )
                     )
+                }
+            }
+        }
+    }
+
+    fun onSearchLocalClicked(id: Int) {
+        mutableMainState.value = Data(responseType = Status.LOADING)
+        viewModelCoroutineScope.launch {
+            when(val result = getCharacterById(id, false)) {
+                is Result.Failure -> {
+                    mutableMainState.postValue(Data(responseType = Status.ERROR, error = result.exception))
                 }
             }
         }

@@ -3,4 +3,6 @@
     <string name="input_charID">insert character ID</string>
     <string name="button_search">Search</string>
     <string name="no_character">NO CHARACTER</string>
+    <string name="btn_search_remote">Search Remote</string>
+    <string name="btn_search_local">Search Local</string>
 </resources>

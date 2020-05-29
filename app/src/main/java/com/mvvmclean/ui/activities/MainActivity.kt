@@ -7,14 +7,11 @@ import android.widget.Toast
 
 import com.domain.entities.MarvelCharacter
 import com.mvvmclean.R
-import com.mvvmclean.ui.di.useCasesModule
-import com.mvvmclean.ui.di.viewModelModule
 import com.mvvmclean.ui.utils.Data
 import com.mvvmclean.ui.utils.Status
 import com.mvvmclean.ui.viewmodels.CharacterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.startKoin
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,13 +20,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startKoin {
-            modules(listOf(useCasesModule, viewModelModule))
-        }
 
         viewModel.mainState.observe(::getLifecycle, ::updateUI)
-        buttonSearch.setOnClickListener{
-            onSearchClicked()
+        buttonSearchRemote.setOnClickListener{
+            onSearchRemoteClicked()
+        }
+        buttonSearchLocal.setOnClickListener{
+            onSearchLocalClicked()
         }
     }
 
@@ -70,7 +67,11 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun onSearchClicked() {
-        viewModel.onSearchClicked(characterID.text.toString().toInt())
+    private fun onSearchRemoteClicked() {
+        viewModel.onSearchRemoteClicked(characterID.text.toString().toInt())
     }
-}
+
+    private fun onSearchLocalClicked() {
+        viewModel.onSearchLocalClicked(characterID.text.toString().toInt())
+
+    }}
