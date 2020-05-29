@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.Toast
 
 import com.domain.entities.MarvelCharacter
-import com.mvvmclean.di.useCaseModule
+import com.mvvmclean.di.useCasesModule
+import com.mvvmclean.di.viewModelModule
 import com.mvvmclean.viewmodels.CharacterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.startKoin
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         startKoin {
-            modules(useCaseModule)
+            modules(listOf(useCasesModule, viewModelModule))
         }
 
         viewModel.mainState.observe(::getLifecycle, ::updateUI)

@@ -7,7 +7,12 @@ import com.mvvmclean.viewmodels.CharacterViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val useCaseModule = module {
-    single<MarvelCharacterRepositoryContract> {MarvelCharacterRepository()}
-    viewModel { CharacterViewModel() }
+val useCasesModule = module {
+    single<MarvelCharacterRepositoryContract> { MarvelCharacterRepository() }
+
 }
+
+
+    val viewModelModule = module {
+        viewModel { CharacterViewModel() }
+    }
