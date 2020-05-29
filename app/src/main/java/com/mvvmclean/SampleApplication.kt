@@ -12,6 +12,6 @@ class SampleApplication: Application() {
         super.onCreate()
         Realm.init(this)
 
-        startKoin { listOf(useCasesModule, viewModelModule)}
+        startKoin { modules(listOf(useCasesModule, viewModelModule))}
     }
 }
