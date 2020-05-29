@@ -1,14 +1,14 @@
 package com.mvvmclean.data.repositories
 
 import com.domain.entities.MarvelCharacter
-import com.domain.repositories.MarvelCharacterRepositoryContract
+import com.domain.repositories.MarvelCharacterRepository
 import com.domain.utils.Result
 import com.mvvmclean.data.MarvelRequestGenerator
 import com.mvvmclean.data.ZERO
 import com.mvvmclean.data.api.MarvelApi
 import com.mvvmclean.data.mapper.CharacterMapperService
 
-class MarvelCharacterRepository : MarvelCharacterRepositoryContract {
+class MarvelCharacterRepositoryImpl : MarvelCharacterRepository {
 
     private val api: MarvelRequestGenerator = MarvelRequestGenerator()
     private val mapper: CharacterMapperService = CharacterMapperService()
