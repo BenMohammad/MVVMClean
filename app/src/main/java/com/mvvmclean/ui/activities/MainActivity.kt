@@ -7,6 +7,7 @@ import android.widget.Toast
 
 import com.domain.entities.MarvelCharacter
 import com.mvvmclean.R
+import com.mvvmclean.data.MINUS_ONE
 import com.mvvmclean.ui.utils.Data
 import com.mvvmclean.ui.utils.Status
 import com.mvvmclean.ui.viewmodels.CharacterViewModel
@@ -68,10 +69,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onSearchRemoteClicked() {
-        viewModel.onSearchRemoteClicked(characterID.text.toString().toInt())
+        val id = if(characterID.text.toString().isNotEmpty()) {
+            characterID.text.toString().toInt()
+        } else {
+            MINUS_ONE
+        }
+
+        viewModel.onSearchRemoteClicked(id)
     }
 
     private fun onSearchLocalClicked() {
-        viewModel.onSearchLocalClicked(characterID.text.toString().toInt())
+        val id = if(characterID.text.toString().isNotEmpty()) {
+            characterID.text.toString().toInt()
+        } else {
+            MINUS_ONE
+        }
 
-    }}
+        viewModel.onSearchLocalClicked(id)
+    }
+}
