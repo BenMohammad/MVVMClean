@@ -28,7 +28,7 @@ class MarvelRequestGenerator {
         )
         .addInterceptor{chain ->
             val defaultRequest = chain.request()
-            val defaultHttpUrl = defaultRequest.url()
+            val defaultHttpUrl = defaultRequest.url
 
             val httpUrl = defaultHttpUrl.newBuilder()
                 .addQueryParameter(PUBLIC_API_KEY_ARG, PRIVATE_API_KEY_ARG_VALUE)
@@ -50,6 +50,7 @@ class MarvelRequestGenerator {
                 Log.d(this@MarvelRequestGenerator.javaClass.simpleName, "Intercept: timeout/connection failure, " +
                 "performing automatic retry ${(tryOuts + 1)}")
                 tryOuts++
+                response.close()
                 response = chain.proceed(request)
         }
             response
