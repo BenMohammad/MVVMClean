@@ -6,30 +6,24 @@ import com.domain.utils.Result
 import com.mvvmclean.data.database.CharacterDatabase
 import com.mvvmclean.data.service.CharacterService
 
-class MarvelCharacterRepositoryImpl : MarvelCharacterRepository {
+class MarvelCharacterRepositoryImpl(private val characterService: CharacterService,
+                                    private val characterDatabase: CharacterDatabase) : MarvelCharacterRepository {
 
 
 
-    override fun getCharacterById(id: Int, getFromRemote: Boolean): Result<MarvelCharacter> {
-        return if(getFromRemote) {
-            when(val marvelCharacterResult: Result<MarvelCharacter> = CharacterService.getCharacterById(id)) {
-                is Result.Failure -> {
-                    marvelCharacterResult
-                }
-                is Result.Success -> {
-                    insertOrUpdateCharacter(marvelCharacterResult.data)
-                    marvelCharacterResult
-                }
+    override fun getCharacterById(id: Int, getFromRemote: Boolean): Result<MarvelCharacter> =
+        if(getFromRemote) {
+            val marvelCharacterResult = characterService.getCharacterById(id)
+            if(marvelCharacterResult is Result.Success) {
+                insertOrUpdateCharacter(marvelCharacterResult.data)
             }
+            marvelCharacterResult
+        } else {
+            characterDatabase.getCharacterById(id)
 
-
-        }else {
-            CharacterDatabase.getCharacterById(id)
-        }
-        }
+    }
 
     private fun insertOrUpdateCharacter(character: MarvelCharacter) {
-
-        CharacterDatabase.insertOrUpdateCharacter(character)
-
-    }}
+        characterDatabase.insertOrUpdateCharacter(character)
+    }
+}

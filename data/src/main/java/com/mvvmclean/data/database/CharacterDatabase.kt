@@ -8,7 +8,8 @@ import java.lang.Exception
 
 class CharacterDatabase {
 
-    companion object {
+
+
         fun getCharacterById(id: Int): Result<MarvelCharacter> {
             val mapper = CharacterMapperLocal()
             Realm.getDefaultInstance().use {
@@ -26,5 +27,5 @@ class CharacterDatabase {
                 }
             }
         }
-    }
+
 }

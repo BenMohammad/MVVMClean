@@ -10,26 +10,20 @@ import java.lang.Exception
 
 class CharacterService {
 
-    companion object {
         private val api: MarvelRequestGenerator = MarvelRequestGenerator()
         private val mapper: CharacterMapperService = CharacterMapperService()
 
         fun getCharacterById(id: Int): Result<MarvelCharacter> {
             val callResponse = api.createService(MarvelApi::class.java).getCharacterById(id)
             val response = callResponse.execute()
-
-            if (response != null) {
-                if (response.isSuccessful) {
-                    response.body()?.data?.characters?.get(ZERO)?.let {
-                        mapper.transform(it)
-                    }?.let {
-                        return Result.Success(it)
-                    }}
-                    return Result.Failure(Exception(response.message()))
-
+            if(response != null) {
+                if(response.isSuccessful) {
+                    response.body()?.data?.characters?.get(ZERO)?.let { mapper.transform(it) }
+                        ?.let { return Result.Success(it)}
                 }
-            return Result.Failure(Exception("Bad request/response"))
+                return Result.Failure(Exception(response.message()))
             }
+            return Result.Failure(Exception("Bad request/response"))
         }
 
     }
