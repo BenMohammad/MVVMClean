@@ -23,7 +23,7 @@ class CharacterDatabase {
             val mapperLocal = CharacterMapperLocal()
             Realm.getDefaultInstance().use {
                 it.executeTransaction{
-                    it.insertOrUpdate(mapperLocal.transformToRepository(character))
+                    realm -> realm.insertOrUpdate(mapperLocal.transformToRepository(character))
                 }
             }
         }
