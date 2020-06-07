@@ -1,4 +1,4 @@
-package com.mvvmclean.data.api
+package com.mvvmclean.data.service.api
 
 import com.mvvmclean.data.service.response.CharacterResponse
 import com.mvvmclean.data.service.response.DataBaseResponse

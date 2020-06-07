@@ -1,7 +1,7 @@
 package com.mvvmclean.data
 
 import com.domain.entities.MarvelCharacter
-import com.mvvmclean.data.api.MarvelApi
+import com.mvvmclean.data.service.api.MarvelApi
 import com.mvvmclean.data.mapper.CharacterMapperService
 import io.reactivex.Observable
 
