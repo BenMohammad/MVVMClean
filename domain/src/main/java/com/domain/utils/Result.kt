@@ -2,6 +2,6 @@ package com.domain.utils
 
 sealed class Result<out T : Any> {
 
-    class Success<out T : Any>(val data: T): Result<T>()
-    class Failure(val exception: Exception): Result<Nothing>()
+    open class Success<out T : Any>(val data: T): Result<T>()
+    open class Failure(val exception: Exception): Result<Nothing>()
 }
