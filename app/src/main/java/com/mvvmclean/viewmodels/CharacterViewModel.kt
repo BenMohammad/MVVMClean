@@ -8,13 +8,12 @@ import com.domain.utils.Result
 import com.mvvmclean.viewmodels.base.BaseViewModel
 import com.mvvmclean.utils.Data
 import com.mvvmclean.utils.Status
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
 import kotlinx.coroutines.launch
 
-class CharacterViewModel: BaseViewModel(SupervisorJob(), Dispatchers.Default) {
 
-    val getCharacterById  = GetCharacterByIdUseCase()
+class CharacterViewModel(val getCharacterById: GetCharacterByIdUseCase): BaseViewModel(    ) {
+
 
     private var mutableMainState: MutableLiveData<Data<MarvelCharacter>> = MutableLiveData()
     val mainState: LiveData<Data<MarvelCharacter>>
@@ -23,39 +22,30 @@ class CharacterViewModel: BaseViewModel(SupervisorJob(), Dispatchers.Default) {
         }
 
 
-    fun onSearchRemoteClicked(id: Int) {
+    fun onSearchRemoteClicked(id: Int) = launch {
         mutableMainState.value =
             Data(responseType = Status.LOADING)
-        viewModelCoroutineScope.launch {
-            when(val result = getCharacterById(id, true)) {
-                is Result.Failure -> {
-                    mutableMainState.postValue(
-                        Data(
-                            responseType = Status.ERROR,
-                            error = result.exception
-                        )
-                    )
-                }
 
+            when(val result = withContext(Dispatchers.IO) {getCharacterById(id, true)}) {
+                is Result.Failure -> {
+                    mutableMainState.value = Data(responseType = Status.ERROR, error = result.exception)
+                }
                 is Result.Success -> {
-                    mutableMainState.postValue(
-                        Data(
-                            responseType = Status.SUCCESSFUL,
-                            data = result.data
-                        )
-                    )
+                    mutableMainState.value = Data(responseType = Status.SUCCESSFUL, data = result.data)
                 }
             }
         }
-    }
 
-    fun onSearchLocalClicked(id: Int) {
+
+    fun onSearchLocalClicked(id: Int) = launch{
         mutableMainState.value = Data(responseType = Status.LOADING)
-        viewModelCoroutineScope.launch {
-            when(val result = getCharacterById(id, false)) {
-                is Result.Failure -> {
-                    mutableMainState.postValue(Data(responseType = Status.ERROR, error = result.exception))
-                }
+
+        when(val result = withContext(Dispatchers.IO) {getCharacterById(id, false)}) {
+            is Result.Failure -> {
+                mutableMainState.value = Data(responseType = Status.ERROR, error = result.exception)
+            }
+            is Result.Success -> {
+                mutableMainState.value = Data(responseType = Status.SUCCESSFUL, data = result.data)
             }
         }
     }
