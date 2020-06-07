@@ -1,8 +1,8 @@
 package com.mvvmclean
 
 import android.app.Application
-import com.mvvmclean.ui.di.useCasesModule
-import com.mvvmclean.ui.di.viewModelModule
+
+import com.mvvmclean.di.viewModelsModule
 import io.realm.Realm
 import org.koin.core.context.startKoin
 
@@ -12,6 +12,6 @@ class SampleApplication: Application() {
         super.onCreate()
         Realm.init(this)
 
-        startKoin { modules(listOf(useCasesModule, viewModelModule))}
+        startKoin { modules(listOf(useCasesModule, viewModelsModule))}
     }
 }

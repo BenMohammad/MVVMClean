@@ -1,4 +1,4 @@
-package com.mvvmclean.ui.utils
+package com.mvvmclean.utils
 
 data class Data<RequestData> (var responseType: Status, var data: RequestData? = null, var error: Exception? = null)
 

@@ -1,13 +1,13 @@
-package com.mvvmclean.ui.viewmodels
+package com.mvvmclean.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.domain.entities.MarvelCharacter
 import com.domain.usecases.GetCharacterByIdUseCase
 import com.domain.utils.Result
-import com.mvvmclean.ui.viewmodels.base.BaseViewModel
-import com.mvvmclean.ui.utils.Data
-import com.mvvmclean.ui.utils.Status
+import com.mvvmclean.viewmodels.base.BaseViewModel
+import com.mvvmclean.utils.Data
+import com.mvvmclean.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
