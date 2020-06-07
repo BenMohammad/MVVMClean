@@ -2,6 +2,7 @@ package com.mvvmclean.data.database
 
 import com.domain.entities.MarvelCharacter
 import com.domain.utils.Result
+import com.mvvmclean.data.database.entity.MarvelCharacterRealm
 import com.mvvmclean.data.mapper.CharacterMapperLocal
 import io.realm.Realm
 import java.lang.Exception

@@ -1,4 +1,4 @@
-package com.mvvmclean.data.database
+package com.mvvmclean.data.database.entity
 
 import com.mvvmclean.data.DEFAULT_ID
 import com.mvvmclean.data.EMPTY_STRING

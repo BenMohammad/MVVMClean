@@ -1,7 +1,7 @@
 package com.mvvmclean.data.mapper
 
 import com.domain.entities.MarvelCharacter
-import com.mvvmclean.data.database.MarvelCharacterRealm
+import com.mvvmclean.data.database.entity.MarvelCharacterRealm
 
 class CharacterMapperLocal: BaseMapperRepository<MarvelCharacterRealm, MarvelCharacter> {
 
@@ -12,9 +12,10 @@ class CharacterMapperLocal: BaseMapperRepository<MarvelCharacterRealm, MarvelCha
     )
 
 
-    override fun transformToRepository(type: MarvelCharacter): MarvelCharacterRealm = MarvelCharacterRealm(
-        type.id,
-        type.name,
-        type.description
-    )
+    override fun transformToRepository(type: MarvelCharacter): MarvelCharacterRealm =
+        MarvelCharacterRealm(
+            type.id,
+            type.name,
+            type.description
+        )
 }
