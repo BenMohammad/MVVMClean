@@ -1,6 +1,8 @@
 package com.mvvmclean.data
 
+import android.util.Log
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,19 +12,41 @@ class MarvelRequestGenerator {
     private val PUBLIC_API_KEY_ARG = "apikey"
     private val TS = "ts"
     private val TS_VALUE = "1"
-    private val httpClient = OkHttpClient.Builder().addInterceptor{chain ->
-        val defaultRequest = chain.request()
+    private val MAX_TRYOUTS = 3
+    private val INIT_TRYOUT = 1
 
-        val defaultHttpUrl = defaultRequest.url()
-        val httpUrl = defaultHttpUrl.newBuilder()
-            .addQueryParameter(PUBLIC_API_KEY_ARG, "b9baa830257d91dacc32db89d34d1f09")
-            .addQueryParameter(PRIVATE_API_KEY_ARG, "3e207d05ea54389185beb3caa92ffc66")
-            .addQueryParameter(TS, TS_VALUE)
-            .build()
+    private val httpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            this.level = HttpLoggingInterceptor.Level.BODY
+            }
+        )
+        .addInterceptor{chain ->
+            val defaultRequest = chain.request()
+            val defaulthttpUrl = defaultRequest.url()
 
-        val requestBuilder = defaultRequest.newBuilder().url(httpUrl)
+            val httpUrl = defaulthttpUrl.newBuilder()
+                .addQueryParameter(PUBLIC_API_KEY_ARG, "b9baa830257d91dacc32db89d34d1f09")
+                .addQueryParameter(PRIVATE_API_KEY_ARG, "3e207d05ea54389185beb3caa92ffc66")
+                .addQueryParameter(TS, TS_VALUE)
+                .build()
 
-        chain.proceed(requestBuilder.build())
+            val requestBuilder = defaultRequest.newBuilder()
+                .url(httpUrl)
+
+            chain.proceed(requestBuilder.build())
+        }
+        .addInterceptor { chain ->
+            var request = chain.request()
+            var response = chain.proceed(request)
+            var tryOuts = INIT_TRYOUT
+
+            while(!response.isSuccessful && tryOuts < MAX_TRYOUTS) {
+                Log.d(this@MarvelRequestGenerator.javaClass.simpleName, "Intercept: timeout/connection failure, " +
+                "performing automatic retry ${(tryOuts + 1)}")
+                tryOuts++
+                response = chain.proceed(request)
+        }
+            response
     }
 
     private val builder = Retrofit.Builder()
