@@ -17,6 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    //try characterId 1011121
+
     private val viewModel by viewModel<CharacterViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setCharacter(character: MarvelCharacter) {
-        textViewDetails.text = character.description
+        textViewDetails.text = character.name
     }
 
     private fun showMessage(message: String) {
