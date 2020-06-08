@@ -10,7 +10,7 @@ private const val PRIVATE_API_KEY_ARG = "hash"
 private const val PRIVATE_API_KEY_ARG_VALUE = "b9baa830257d91dacc32db89d34d1f09"
 private const val PUBLIC_API_KEY_ARG = "apikey"
 private const val PUBLIC_API_KEY_ARG_VALUE = "3e207d05ea54389185beb3caa92ffc66"
-private const val MARVEL_BASE_URL = "https://gateway.marvel.com/public/"
+private const val MARVEL_BASE_URL = "https://gateway.marvel.com:443/public/"
 private const val TS = "ts"
 private const val TS_VALUE = "1"
 private const val MAX_TRYOUTS = 3
@@ -18,6 +18,11 @@ private const val INIT_TRYOUT = 1
 
 
 class MarvelRequestGenerator {
+
+
+    val str: String = "9DE59A5CFF2FAF382460C922BBFCB426"
+
+
 
 
 
@@ -28,7 +33,7 @@ class MarvelRequestGenerator {
         )
         .addInterceptor{chain ->
             val defaultRequest = chain.request()
-            val defaultHttpUrl = defaultRequest.url
+            val defaultHttpUrl = defaultRequest.url()
 
             val httpUrl = defaultHttpUrl.newBuilder()
                 .addQueryParameter(PUBLIC_API_KEY_ARG, PRIVATE_API_KEY_ARG_VALUE)
